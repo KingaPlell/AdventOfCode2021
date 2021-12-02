@@ -11,23 +11,32 @@ int main() {
     ifstream f;
     f.open("input.txt");
 
-    int x;
+    int hor_poz= 0;
+    int depth = 0;
+    int aim = 0;
+    int numb;
     while(getline (f, txt)){
-        x = stoi(txt);
-        num.push_back(x);
-    }
+        char first_char = txt[0];
+        txt.erase(txt.begin(),txt.end()-2);
+        numb = stoi(txt);
 
-    int counter = 0;
-    int sum1 = num[0] + num[1] + num[2];
-    for(int i = 3; i < num.size(); i++)
-    {
-        int sum2 = num[i-2] + num[i-1] + num[i];
-        if(sum1 < sum2){
-            counter++;
+        switch (first_char) {
+            case 'f':
+                hor_poz += numb;
+                depth += aim * numb;
+                break;
+            case 'd':
+                aim += numb;
+                break;
+            case 'u':
+                aim -= numb;
+                break;
         }
-        sum1 = sum2;
+
     }
-    f.close();
-    cout << counter<<endl;
+    cout << hor_poz << endl;
+    cout << depth << endl;
+    int result = hor_poz * depth;
+    cout << result << endl;
     return 0;
 }
